@@ -13,9 +13,10 @@
 #lotus-tool-erp {
 	zoom: 0.8;
 	position: absolute;
-	bottom: 20px;
-	left: 800px;
-	max-width: 290px;
+	max-width: 400px;
+	top: 20px;
+	right: 0;
+	transform: translateX(-100%);
 }
 #lotus-tool-edit {
 	display: none;
@@ -125,6 +126,9 @@
 .flag-select {
 	background-color: #fff;
 }
+#lotus-tool-erp-input {
+	text-align: center;
+}
 .lotus-tool-erp-flag:not(.flag-select):hover {
 	background-color: #303030;
 }
@@ -133,18 +137,21 @@
 	justify-content: center;
 	align-items: center;
 }
-.lotus-tool-erp-flag-1 {
+.lotus-tool-erp-flag svg {
+	pointer-events: none;
+}
+.lotus-tool-erp-flag[flag="1"] svg {
 	fill: #ff2200;
 }
-.lotus-tool-erp-flag-2 {
-	fill: #ffee00;
+.lotus-tool-erp-flag[flag="2"] svg {
+	fill: #eeb64d;
 }
-.lotus-tool-erp-flag-3 {
+.lotus-tool-erp-flag[flag="3"] svg {
 	fill: #3cff00;
 }
-.lotus-tool-erp-flag-4 {
+.lotus-tool-erp-flag[flag="4"] svg {
 	fill: #00b9ff;
 }
-.lotus-tool-erp-flag-5 {
+.lotus-tool-erp-flag[flag="5"] svg {
 	fill: #ae00ff;
 }
