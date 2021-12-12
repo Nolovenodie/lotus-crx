@@ -1,0 +1,150 @@
+#lotus-tool-info,
+#lotus-tool-edit,
+#lotus-tool-erp {
+	width: 100%;
+	z-index: 999;
+	border-radius: 5px;
+	overflow: hidden;
+
+	background-color: rgba(0, 0, 0, 0.75);
+	/* backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px); */
+}
+#lotus-tool-erp {
+	zoom: 0.8;
+	position: absolute;
+	bottom: 20px;
+	left: 800px;
+	max-width: 290px;
+}
+#lotus-tool-edit {
+	display: none;
+	width: 600px;
+	position: fixed;
+	z-index: 1999;
+	left: calc(50% - 300px);
+	bottom: 24px;
+}
+#lotus-tool-edit .mdui-btn,
+#lotus-tool-erp .mdui-btn {
+	background-color: #2b2b2b !important;
+}
+.lotus-tool-info-header,
+.lotus-tool-edit-header,
+.lotus-tool-erp-header {
+	padding: 0 10px;
+	box-sizing: border-box;
+	height: 40px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.lotus-tool-edit-header,
+.lotus-tool-erp-header {
+	justify-content: center;
+}
+#lotus-tool-info-table {
+	border: none !important;
+}
+#lotus-tool-info-table table {
+	table-layout: fixed;
+}
+#lotus-tool-info-table td {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#lotus-tool-info-title,
+#lotus-tool-info-count {
+	color: #fff;
+	font-weight: 600;
+	font-size: 16px;
+}
+#lotus-tool-info-title {
+	position: relative;
+	top: 1.5px;
+	font-weight: unset;
+}
+#lotus-tool-info-title b {
+	background-color: #ff2300;
+	padding: 3px 5px;
+	border-radius: 11px;
+	padding-bottom: 1px;
+}
+#lotus-tool-info-count {
+	padding: 0 5px;
+	padding-top: 1px;
+	color: #000;
+	border-radius: 5px;
+	font-size: 15.2px;
+	background-color: #fff;
+}
+.lotus-tool-info-whith {
+	background-color: #fff !important;
+}
+.lotus-tool-info-whith p,
+.lotus-tool-info-whith path {
+	color: #000 !important;
+	fill: #000 !important;
+}
+#lotus-tool-edit-content,
+#lotus-tool-erp-content {
+	border: none;
+	cursor: default;
+}
+#lotus-tool-edit-content > div,
+#lotus-tool-erp-content {
+	padding: 8px 12px 12px;
+	box-sizing: border-box;
+}
+#lotus-tool-edit-content .mdui-textfield-input {
+	margin-bottom: 8px;
+}
+.lotus-tool-edit-icon,
+.lotus-tool-erp-icon {
+	margin-right: 8px;
+}
+
+#lotus-tool-erp-button {
+	width: 58px !important;
+	min-width: 58px !important;
+	text-align: center;
+	padding: 0;
+}
+.lotus-tool-erp-flag {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 5px;
+	margin: 5px;
+	transition: 0.25s;
+	cursor: pointer;
+}
+.flag-select {
+	background-color: #fff;
+}
+.lotus-tool-erp-flag:not(.flag-select):hover {
+	background-color: #303030;
+}
+.lotus-tool-erp-flag-list {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.lotus-tool-erp-flag-1 {
+	fill: #ff2200;
+}
+.lotus-tool-erp-flag-2 {
+	fill: #ffee00;
+}
+.lotus-tool-erp-flag-3 {
+	fill: #3cff00;
+}
+.lotus-tool-erp-flag-4 {
+	fill: #00b9ff;
+}
+.lotus-tool-erp-flag-5 {
+	fill: #ae00ff;
+}

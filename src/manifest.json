@@ -1,0 +1,52 @@
+{
+	"manifest_version": 2,
+	"name": "Lotus Tools.",
+	"version": "1.2.2",
+	"description": "[莲] 跨境工具箱",
+	"author": "Nolovenodie",
+	"homepage_url": "https://ssky.me",
+	"icons": {
+		"16": "static/img/icon.png",
+		"19": "static/img/icon.png",
+		"38": "static/img/icon.png",
+		"48": "static/img/icon.png",
+		"128": "static/img/icon.png"
+	},
+	"browser_action": {
+		"default_icon": "static/img/icon.png",
+		"default_title": "Lotus Tools.",
+		"default_popup": "popup.html"
+	},
+	"options_page": "option.html",
+	"background": {
+		"persistent": false,
+		"scripts": ["background.main.js"]
+	},
+	"content_scripts": [
+		{
+			"matches": ["https://www.coupang.com/np/search*", "http://www.coupang.com/np/search*"],
+			"js": ["static/js/mdui.min.js", "static/js/jquery-3.6.0.min.js", "static/js/utils.js", "search-content.main.js"],
+			"css": ["static/css/mdui.min.css", "static/css/style.css"],
+			"run_at": "document_end"
+		},
+		{
+			"matches": ["https://www.coupang.com/vp/products/*", "http://www.coupang.com/vp/products/*"],
+			"js": ["static/js/mdui.min.js", "static/js/jquery-3.6.0.min.js", "static/js/utils.js", "info-content.main.js"],
+			"css": ["static/css/mdui.min.css", "static/css/style.css"],
+			"run_at": "document_end"
+		},
+		{
+			"matches": ["https://wing.coupang.com/tenants/seller-web/vendor-inventory/modify*", "http://wing.coupang.com/tenants/seller-web/vendor-inventory/modify*"],
+			"js": ["static/js/mdui.min.js", "static/js/jquery-3.6.0.min.js", "static/js/utils.js", "edit-content.main.js"],
+			"css": ["static/css/mdui.min.css", "static/css/style.css"],
+			"run_at": "document_end"
+		},
+		{
+			"matches": ["https://erp.kjwykj.com/*", "http://erp.kjwykj.com/*"],
+			"js": ["static/js/mdui.min.js", "static/js/jquery-3.6.0.min.js", "static/js/utils.js", "erp-content.main.js"],
+			"css": ["static/css/mdui.min.css", "static/css/style.css"],
+			"run_at": "document_end"
+		}
+	],
+	"permissions": ["http://*/*", "https://*/*", "<all_urls>", "downloads", "tabs"]
+}
