@@ -1,0 +1,31 @@
+{
+    "version": "2.1.0",
+    
+    "search_url": "https://reco.coupang.com/recommend/widget",
+    "shop_url": "https://store.coupang.com/vp/vendors/",
+    "item_url": "https://www.coupang.com/vp/products/",
+
+    "lite_config":{
+        "search": {
+            "page": 30,
+            "thread": 3
+        },
+        "shop": {
+            "page": 30,
+            "thread": 3
+        },
+        "fission": {
+            "layer": 3,
+            "page": 30,
+            "thread": 3
+        }
+    },
+
+    "shop_filter_active": false,
+    "shop_filter": [
+        "Co Ltd",
+        "Co, Ltd",
+        "Co., Ltd.",
+        "Trading Company"
+    ]  
+}
