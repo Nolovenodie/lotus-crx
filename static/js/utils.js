@@ -66,14 +66,13 @@ function vendorItems(productId, vendoritemsId, callback) {
 	});
 }
 
-function getOrderInfo(orderId) {
+function getOrderInfo(orderId, callback) {
 	$.ajax({
 		type: "GET",
 		url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
 		async: true,
-		headers: { "content-type": "application/json;charset=UTF-8" },
 		success: (data) => {
-			if (data != "") {
+			if (data != "" && data.success) {
 				callback(true, data);
 			} else {
 				callback(false);
@@ -82,7 +81,7 @@ function getOrderInfo(orderId) {
 	});
 }
 
-function setOrderInfo(orderId, data) {
+function setOrderInfo(orderId, data, callback) {
 	$.ajax({
 		type: "POST",
 		url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
