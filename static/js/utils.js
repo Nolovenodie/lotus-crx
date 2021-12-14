@@ -67,33 +67,58 @@ function vendorItems(productId, vendoritemsId, callback) {
 }
 
 function getOrderInfo(orderId, callback) {
-	$.ajax({
-		type: "GET",
-		url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
-		async: true,
-		success: (data) => {
-			if (data != "" && data.success) {
-				callback(true, data);
-			} else {
+	try {
+		$.ajax({
+			type: "GET",
+			url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
+			async: true,
+			success: (data) => {
+				if (data != "") {
+					data = jsonp(data);
+					if (data.success) {
+						callback(true, data);
+						return;
+					}
+				}
 				callback(false);
-			}
-		},
-	});
+			},
+			error: () => {
+				callback(false);
+			},
+		});
+	} catch (error) {
+		callback(false);
+	}
 }
 
 function setOrderInfo(orderId, data, callback) {
-	$.ajax({
-		type: "POST",
-		url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
-		data: data,
-		async: true,
-		headers: { "content-type": "application/json;charset=UTF-8" },
-		success: (data) => {
-			if (data != "") {
-				callback(true, data);
-			} else {
+	try {
+		$.ajax({
+			type: "POST",
+			url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
+			data: data,
+			async: true,
+			success: (data) => {
+				if (data != "") {
+					data = jsonp(data);
+					if (data.success) {
+						callback(true, data);
+						return;
+					}
+				}
 				callback(false);
-			}
-		},
-	});
+			},
+			error: () => {
+				callback(false);
+			},
+		});
+	} catch (error) {
+		callback(false);
+	}
+}
+
+function jsonp(data) {
+	data = data.replace("callback(", "");
+	data = data.substr(0, data.length - 1);
+	return JSON.parse(data);
 }

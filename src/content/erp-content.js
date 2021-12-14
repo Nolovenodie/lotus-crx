@@ -4,26 +4,34 @@ function initHtml() {
 		$(".app-main .el-table__body-wrapper .el-table__row.expanded").each((index, element) => {
 			let line = $(element),
 				body = line.next().find(".demo-table-expand"),
-				orderId = line.find(".el-link--inner").text();
+				orderId = line.find(".el-link--inner").text(),
+				goodsId = line
+					.find("+tr")
+					.find(".is-underline:eq(0)")
+					.text();
 
 			// 跳过/刷新
-			let tool = body.find("#lotus-tool-erp");
+
+			if (body.attr("get") == true) {
+				return;
+			}
+			let tool = body.find(".lotus-tool-erp");
 			if (tool.length > 0) {
 				if (tool.attr("order-id") == orderId) {
 					return;
 				} else {
+					console.log(tool.attr("order-id"));
 					tool.remove();
 				}
 			}
 
-			console.log(orderId);
-
-			let flag = null;
+			body.attr("get", true);
 			// 获取
 			getOrderInfo(orderId, (success, data) => {
+				body.attr("get", false);
 				if (success) {
 					let html = "\
-					<div id='lotus-tool-erp' class='mdui-theme-layout-dark mdui-shadow-7 mdui-color-grey-900'>\
+					<div id='lotus-tool-erp' class='lotus-tool-erp mdui-theme-layout-dark mdui-shadow-7 mdui-color-grey-900'>\
 						<div id='lotus-tool-erp-content' class='mdui-table-fluid'>\
 							<div class='lotus-tool-erp-flag-list'>\
 								<div class='lotus-tool-erp-flag' flag='1'>\
@@ -47,8 +55,16 @@ function initHtml() {
 						</div>\
 					</div>";
 					html = $(html);
+
+					html.attr("shop", line.find(".el-table_1_column_3").text());
+					html.attr("goods-id", goodsId);
 					html.attr("order-id", orderId);
-					html.find(".lotus-tool-erp-flag:eq(" + flag + ")").addClass("flag-select");
+					html.attr("order-time", line.find(".el-table_1_column_10").text());
+					html.find("input").val(data.data.mark);
+
+					console.log(orderId, goodsId, data.data);
+
+					html.find(".lotus-tool-erp-flag[flag='" + data.data.flag + "']").addClass("flag-select");
 					html.find(".lotus-tool-erp-flag").click((e) => {
 						selectFlag(e, orderId);
 					});
@@ -59,19 +75,49 @@ function initHtml() {
 				}
 			});
 		});
-	}, 5000000);
+	}, 500);
 }
 
 function selectFlag(e, orderId) {
 	let body = $("#lotus-tool-erp[order-id='" + orderId + "']");
 
-	body.find(".flag-select").removeClass("flag-select");
-	$(e.target).addClass("flag-select");
+	if ($(e.target).is(".flag-select")) {
+		$(e.target).removeClass("flag-select");
+	} else {
+		body.find(".flag-select").removeClass("flag-select");
+		$(e.target).addClass("flag-select");
+	}
 }
-function saveInfo(e, orderId) {
-	let body = $("#lotus-tool-erp[order-id='" + orderId + "']");
 
-	console.log(orderId);
+function saveInfo(e, orderId) {
+	let body = $(".lotus-tool-erp[order-id='" + orderId + "']");
+
+	data = {
+		shop: body.attr("shop"),
+		cookie: document.cookie,
+		order_id: orderId,
+		order_time: body.attr("order-time"),
+		goods_id: body.attr("goods-id"),
+		flag: body.find(".flag-select").attr("flag"),
+		mark: body.find("input").val(),
+	};
+
+	// if ((data.flag == null || data.flag == "") && (data.mark == null || data.mark == "")) {
+	// 	mdui.alert("请先填写信息!");
+	// 	return;
+	// }
+
+	if (data.flag == null) {
+		data.flag = 0;
+	}
+
+	setOrderInfo(orderId, data, (success, result) => {
+		if (success && result.success) {
+			mdui.alert("保存成功, 订单: " + orderId);
+			return;
+		}
+		mdui.alert("保存失败, 请检查网络后重试!");
+	});
 }
 
 function initTool() {
