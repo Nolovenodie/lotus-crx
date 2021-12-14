@@ -1,31 +1,34 @@
 {
-    "version": "2.1.0",
-    
-    "search_url": "https://reco.coupang.com/recommend/widget",
-    "shop_url": "https://store.coupang.com/vp/vendors/",
-    "item_url": "https://www.coupang.com/vp/products/",
+	"version": "2.2.0",
 
-    "lite_config":{
-        "search": {
-            "page": 30,
-            "thread": 3
-        },
-        "shop": {
-            "page": 30,
-            "thread": 3
-        },
-        "fission": {
-            "layer": 3,
-            "page": 30,
-            "thread": 3
-        }
-    },
+	"search_url": "https://www.coupang.com/np/search",
+	"shop_url": "https://store.coupang.com/vp/vendors/",
+	"item_url": "https://www.coupang.com/vp/products/",
 
-    "shop_filter_active": false,
-    "shop_filter": [
-        "Co Ltd",
-        "Co, Ltd",
-        "Co., Ltd.",
-        "Trading Company"
-    ]  
+	"lite_config": {
+		"search": {
+			"page": 30,
+			"thread": 3
+		},
+		"shop": {
+			"page": 30,
+			"thread": 3
+		},
+		"fission": {
+			"layer": 3,
+			"page": 30,
+			"thread": 3
+		}
+	},
+
+	"filter": {
+		"include": {
+			"active": true,
+			"list": ["Co Ltd", "CO.,LTD", "Co, Ltd", "Co., Ltd", "Trading Company"]
+		},
+		"exclude": {
+			"active": true,
+			"list": ["Dezhou Hangjia", "Hefei Yejia", "Xuchang Fu Tu", "Zhanjiang Yingxi", "Pingdingshan Weimanhong", "Shijiazhuang Zunmao", "Xuchang La Wen", "Guizhou Guiyicheng", "Qingdao Yongxingshun", "Guangzhou Hao Wei", "Beijing Xinxu Yuan", "Yiwu Ao Le", "Quanzhou Li Jinhua", "Chengdu Shufengnong", "Changchun City Han Feng"]
+		}
+	}
 }

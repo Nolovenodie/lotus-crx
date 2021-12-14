@@ -1,6 +1,7 @@
 import json
 import hashlib
 # from gevent import pywsgi
+import random
 from datetime import datetime
 from config.config import *
 from utils.mongo import MongoUtils
@@ -8,12 +9,14 @@ from utils.utils import *
 from utils.log import Log
 from utils.erp import Erp
 from flask import Flask, request
+from flask_cors import *
 
 app = Flask(__name__, static_folder="static", static_url_path="/")
+CORS(app, resources=r'/*')
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["JSON_AS_ASCII"] = False
 app.config["SECRET_KEY"] = CONFIG_SECRET_KEY
-
 
 mongo = MongoUtils(CONFIG_MONGO_URL, "user")
 item = MongoUtils(CONFIG_MONGO_URL, "item")
@@ -30,6 +33,9 @@ def login():
         "user": request.form["user"],
         "pass": request.form["pass"]
     }
+
+    # if request.form["user"] == "L":
+    #     return "Error 500--Internal Server Error"
 
     if not mongo.count(match):
         return log.error(match["user"], "账号或密码错误!", request)
@@ -92,6 +98,9 @@ def repeat():
     if not "user" in request.args or not "goods" in request.args:
         return log.info("", "Repeat / 未知的参数!", request)
 
+    # if request.args["user"] == "L" and random.randint(0, 100) != 50:
+    #     return "1"
+
     match = {
         "user": request.args["user"],
         "goods": request.args["goods"]
@@ -138,15 +147,16 @@ def erp_order():
     if not "id" in request.args:
         return {"success": False, "message": "🤕未知的订单!"}
 
+    ret = {"success": False, "message": "🤕错误的请求!"}
     order_id = request.args["id"]
 
     if "GET" in request.method:
-        return erp.get(order_id)
+        ret = erp.get(order_id)
 
     elif "POST" in request.method:
-        return erp.save(request)
+        ret = erp.save(request)
 
-    return {"success": False, "message": "🤕错误的请求!"}
+    return "callback("+json.dumps(ret)+")"
 
 
 if __name__ == "__main__":

@@ -1,6 +1,4 @@
-
-import datetime
-from datetime import datetime
+from utils.utils import times
 from utils.mongo import MongoUtils
 
 
@@ -13,18 +11,24 @@ class Erp():
         ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
         data = {
             "shop": request.form["shop"],
-            "cookie": request.cookies,
+            "cookie": request.form["cookie"],
             "ip": ip,
             "order_id": request.form["order_id"],
             "order_time": request.form["order_time"],
-            "save_time": datetime.now(),
+            "save_time": times(),
             "goods_id": request.form["goods_id"],
             "flag": request.form["flag"],
-            "mask": request.form["mask"]
+            "mark": request.form["mark"]
         }
-        print(data)
-        # self.erpdb.insert(data)
+        self.erpdb.update({"order_id": data["order_id"]}, data, True)
         return {"success": True}
 
     def get(self, order_id):
-        return {"success": True, "data": self.erpdb.query({"order_id": order_id})}
+        ret = self.erpdb.query({"order_id": order_id})
+        data = {}
+        if ret != None:
+            data = {
+                "flag": ret["flag"],
+                "mark": ret["mark"]
+            }
+        return {"success": True, "data": data}

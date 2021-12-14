@@ -1,3 +1,8 @@
+import time
+import pytz
+from datetime import datetime
+
+
 def rc4_crypt(PlainBytes: bytes, KeyBytes: bytes) -> str:
     cipherList = []
 
@@ -21,3 +26,8 @@ def rc4_crypt(PlainBytes: bytes, KeyBytes: bytes) -> str:
 
     result_hexstr = ''.join(['%02x' % i for i in cipherList])
     return result_hexstr.upper()
+
+
+def times():
+    return datetime.fromtimestamp(int(time.time()), pytz.timezone(
+        'Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
