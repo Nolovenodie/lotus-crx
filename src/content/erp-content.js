@@ -28,6 +28,9 @@ function initHtml() {
 			body.attr("get", true);
 			// 获取
 			getOrderInfo(orderId, (success, data) => {
+				if (body.attr("get") == true) {
+					return;
+				}
 				body.attr("get", false);
 				if (success) {
 					let html = "\
@@ -71,11 +74,14 @@ function initHtml() {
 					html.find("#lotus-tool-erp-button").click((e) => {
 						saveInfo(e, orderId);
 					});
-					body.prepend(html);
+
+					if (body.attr("get") != true) {
+						body.prepend(html);
+					}
 				}
 			});
 		});
-	}, 500);
+	}, 2000);
 }
 
 function selectFlag(e, orderId) {

@@ -70,7 +70,7 @@ function getOrderInfo(orderId, callback) {
 	try {
 		$.ajax({
 			type: "GET",
-			url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
+			url: "http://lotus.ssky.me/erp/order?id=" + orderId,
 			async: true,
 			success: (data) => {
 				if (data != "") {
@@ -95,7 +95,7 @@ function setOrderInfo(orderId, data, callback) {
 	try {
 		$.ajax({
 			type: "POST",
-			url: "http://127.0.0.1:8686/erp/order?id=" + orderId,
+			url: "http://lotus.ssky.me/erp/order?id=" + orderId,
 			data: data,
 			async: true,
 			success: (data) => {
