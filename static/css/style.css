@@ -158,3 +158,15 @@
 .lotus-tool-erp-flag[flag="5"] svg {
 	fill: #ae00ff;
 }
+
+#lotus-tool-image {
+	display: inline-block;
+	width: 36px;
+	min-width: 36px;
+	height: 32px;
+	padding: 0;
+	z-index: 9999;
+	position: absolute;
+	right: 0;
+	transform: translateX(-50%);
+}

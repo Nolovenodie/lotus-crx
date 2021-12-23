@@ -67,7 +67,7 @@
 	font-weight: unset;
 }
 #lotus-tool-info-title b {
-	background-color: #ff2300;
+	/* background-color: #ff2300; */
 	padding: 3px 5px;
 	border-radius: 11px;
 	padding-bottom: 1px;
@@ -105,7 +105,10 @@
 .lotus-tool-erp-icon {
 	margin-right: 8px;
 }
-
+.lotus-tool-info-header .sub {
+	background-color: #ff2200;
+	margin-left: 5px;
+}
 #lotus-tool-erp-button {
 	width: 58px !important;
 	min-width: 58px !important;
@@ -154,4 +157,16 @@
 }
 .lotus-tool-erp-flag[flag="5"] svg {
 	fill: #ae00ff;
+}
+
+#lotus-tool-image {
+	display: inline-block;
+	width: 36px;
+	min-width: 36px;
+	height: 32px;
+	padding: 0;
+	z-index: 9999;
+	position: absolute;
+	right: 0;
+	transform: translateX(-50%);
 }
